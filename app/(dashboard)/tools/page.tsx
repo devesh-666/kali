@@ -76,9 +76,10 @@ function getToolsData(params: SearchParams) {
 export default async function ToolsPage({
   searchParams,
 }: {
-  searchParams: SearchParams
+  searchParams: Promise<SearchParams>
 }) {
-  const { tools, total, page, totalPages, categories: cats } = getToolsData(searchParams)
+  const resolvedParams = await searchParams
+  const { tools, total, page, totalPages, categories: cats } = getToolsData(resolvedParams)
 
   const difficulties = ['beginner', 'intermediate', 'advanced']
 
