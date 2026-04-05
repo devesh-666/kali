@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection highlight */
+::selection {
+  background-color: #22c55e;
+  color: #0a0a0a;
+}
+
+/* Global thin dark scrollbar */
+@media (prefers-color-scheme: dark) {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #1a1a1a #0a0a0a;
+  }
+  *::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  *::-webkit-scrollbar-track {
+    background: #0a0a0a;
+  }
+  *::-webkit-scrollbar-thumb {
+    background-color: #2a2a2a;
+    border-radius: 3px;
+  }
+  *::-webkit-scrollbar-thumb:hover {
+    background-color: #3a3a3a;
+  }
+}
+
+/* Dark mode class scrollbar (for next-themes) */
+.dark * {
+  scrollbar-width: thin;
+  scrollbar-color: #1a1a1a #0a0a0a;
+}
+.dark *::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.dark *::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+.dark *::-webkit-scrollbar-thumb {
+  background-color: #2a2a2a;
+  border-radius: 3px;
+}
+.dark *::-webkit-scrollbar-thumb:hover {
+  background-color: #3a3a3a;
+}
+
+/* Terminal cursor — blinking | after element */
+.terminal-cursor::after {
+  content: '|';
+  display: inline-block;
+  margin-left: 2px;
+  color: #22c55e;
+  animation: blink 1s step-end infinite;
+}
+
+/* Glow green text shadow */
+.glow-green {
+  text-shadow: 0 0 8px #22c55e;
+}
+
+/* Custom thin green scrollbar for code blocks */
+.code-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #22c55e40 #0a0a0a;
+}
+.code-scrollbar::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+.code-scrollbar::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+.code-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #22c55e40;
+  border-radius: 2px;
+}
+.code-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: #22c55e80;
+}
+
+/* Blink keyframe (also defined in tailwind.config but kept here for direct use) */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
