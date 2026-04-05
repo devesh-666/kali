@@ -6,23 +6,24 @@ import ToolCard from '@/components/tools/ToolCard'
 import { ChevronRight, Layers } from 'lucide-react'
 
 interface PageProps {
-  params: { category: string }
+  params: Promise<{ category: string }>
 }
 
 export default async function CategoryPage({ params }: PageProps) {
-  const category = categories.find((c) => c.slug === params.category.toLowerCase())
+  const { category: categorySlug } = await params
+  const category = categories.find((c) => c.slug === categorySlug.toLowerCase())
 
   if (!category) {
     return (
       <div className="flex flex-col items-center justify-center py-24 space-y-4">
         <div className="font-mono text-center space-y-2">
           <p className="text-green-500 text-sm">
-            $ find /categories -name &quot;{params.category}&quot;
+            $ find /categories -name &quot;{categorySlug}&quot;
           </p>
           <p className="text-red-400 mt-3 text-lg font-bold">404: Category Not Found</p>
           <p className="text-gray-500 text-sm">
             The category{' '}
-            <span className="text-gray-300">{params.category}</span> does not exist.
+            <span className="text-gray-300">{categorySlug}</span> does not exist.
           </p>
         </div>
         <Link

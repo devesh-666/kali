@@ -10,7 +10,7 @@ import CodeBlock from '@/components/ui/CodeBlock'
 import Badge from '@/components/ui/Badge'
 
 interface PageProps {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
 const difficultyColor: Record<string, string> = {
@@ -20,16 +20,17 @@ const difficultyColor: Record<string, string> = {
 }
 
 export default async function ToolDetailPage({ params }: PageProps) {
-  const tool = toolsData.find((t) => t.slug === params.slug.toLowerCase())
+  const { slug } = await params
+  const tool = toolsData.find((t) => t.slug === slug.toLowerCase())
 
   if (!tool) {
     return (
       <div className="flex flex-col items-center justify-center py-24 space-y-4">
         <div className="font-mono text-center space-y-2">
-          <p className="text-green-500 text-sm">$ find /tools -name &quot;{params.slug}&quot;</p>
+          <p className="text-green-500 text-sm">$ find /tools -name &quot;{slug}&quot;</p>
           <p className="text-red-400 mt-3 text-lg font-bold">404: Tool Not Found</p>
           <p className="text-gray-500 text-sm">
-            The tool <span className="text-gray-300">{params.slug}</span> does not exist in the
+            The tool <span className="text-gray-300">{slug}</span> does not exist in the
             database.
           </p>
         </div>
